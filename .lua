@@ -1,5 +1,6 @@
--- RynixHub UI Module (Tabbed)
--- The Forge = Tab
+-- RynixHub UI (Executor Module)
+-- The Forge is a TAB
+-- loadstring compatible
 
 local RynixHubUI = {}
 RynixHubUI.__index = RynixHubUI
@@ -7,14 +8,14 @@ RynixHubUI.__index = RynixHubUI
 function RynixHubUI:Create(parent)
     parent = parent or game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-    -- ScreenGui
+    -- =========================
+    -- GUI
+    -- =========================
     local Gui = Instance.new("ScreenGui")
     Gui.Name = "RynixHub"
     Gui.Parent = parent
 
-    -- Main
-    local Main = Instance.new("Frame")
-    Main.Parent = Gui
+    local Main = Instance.new("Frame", Gui)
     Main.BackgroundColor3 = Color3.fromRGB(0,0,0)
     Main.BackgroundTransparency = 0.15
     Main.BorderSizePixel = 0
@@ -22,7 +23,6 @@ function RynixHubUI:Create(parent)
     Main.Size = UDim2.new(0,491,0,275)
     Instance.new("UICorner", Main)
 
-    -- Title
     local Title = Instance.new("TextLabel", Main)
     Title.BackgroundTransparency = 1
     Title.Position = UDim2.new(0.108,0,-0.055,0)
@@ -32,14 +32,13 @@ function RynixHubUI:Create(parent)
     Title.TextSize = 34
     Title.Font = Enum.Font.Unknown
 
-    -- Tabs holder
+    -- Tabs
     local TabHolder = Instance.new("Frame", Main)
     TabHolder.BackgroundColor3 = Color3.fromRGB(40,40,40)
     TabHolder.BorderSizePixel = 0
     TabHolder.Size = UDim2.new(0,121,0,275)
     Instance.new("UICorner", TabHolder)
 
-    -- Header
     local Header = Instance.new("TextLabel", TabHolder)
     Header.BackgroundTransparency = 1
     Header.Size = UDim2.new(1,0,0,50)
@@ -48,23 +47,14 @@ function RynixHubUI:Create(parent)
     Header.TextSize = 17
     Header.Font = Enum.Font.Unknown
 
-    -- Indicator
-    local Indicator = Instance.new("Frame", TabHolder)
-    Indicator.BackgroundColor3 = Color3.fromRGB(255,255,255)
-    Indicator.BorderSizePixel = 0
-    Indicator.Position = UDim2.new(0,0,0.156,0)
-    Indicator.Size = UDim2.new(1,0,0,2)
-
-    -- Content Holder
     local ContentHolder = Instance.new("Frame", Main)
     ContentHolder.BackgroundTransparency = 1
     ContentHolder.Position = UDim2.new(0.281,0,0.153,0)
     ContentHolder.Size = UDim2.new(0,335,0,222)
 
     -- =========================
-    -- TABS
+    -- TAB SYSTEM
     -- =========================
-
     local Tabs = {}
 
     local function createTab(name, order)
@@ -97,11 +87,12 @@ function RynixHubUI:Create(parent)
         end
     end
 
-    -- Create Forge Tab
-    local ForgeTab = createTab("The Forge (Beta)", 0)
+    -- =========================
+    -- FORGE TAB
+    -- =========================
+    local Forge = createTab("The Forge (Beta)", 0)
 
-    -- Example content
-    local Label = Instance.new("TextLabel", ForgeTab.Content)
+    local Label = Instance.new("TextLabel", Forge.Content)
     Label.Size = UDim2.new(1,0,1,0)
     Label.BackgroundTransparency = 1
     Label.Text = "The Forge Content"
@@ -109,11 +100,10 @@ function RynixHubUI:Create(parent)
     Label.TextSize = 25
     Label.Font = Enum.Font.SourceSansBold
 
-    ForgeTab.Button.MouseButton1Click:Connect(function()
+    Forge.Button.MouseButton1Click:Connect(function()
         switchTab("The Forge (Beta)")
     end)
 
-    -- Default tab
     switchTab("The Forge (Beta)")
 
     return {
@@ -123,4 +113,4 @@ function RynixHubUI:Create(parent)
     }
 end
 
-return RynixHubUI
+return setmetatable({}, RynixHubUI)
