@@ -1,4 +1,4 @@
-i want a hover to each button local Players = game:GetService("Players")
+local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
 local Module = {}
