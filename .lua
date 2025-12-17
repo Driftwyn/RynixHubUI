@@ -46,7 +46,7 @@ local Title = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
 local TabHolder = Instance.new("Frame")
 local UICorner_2 = Instance.new("UICorner")
-local SupportedgamesCanbechangetoFeatures = Instance.new("TextLabel")
+local Features = Instance.new("TextLabel")
 local Dash = Instance.new("Frame")
 local TheForge = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
@@ -77,7 +77,7 @@ Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Title.BorderSizePixel = 0
 Title.Position = UDim2.new(0.107942976, 0, -0.0545454547, 0)
 Title.Size = UDim2.new(0, 491, 0, 68)
-Title.Font = Enum.Font.Unknown
+Title.Font = Enum.Font.ArialBold
 Title.Text = "RYNIX HUB"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 34.000
@@ -93,18 +93,18 @@ TabHolder.Size = UDim2.new(0, 121, 0, 275)
 
 UICorner_2.Parent = TabHolder
 
-SupportedgamesCanbechangetoFeatures.Name = "Supportedgames(Can be change to Features)"
-SupportedgamesCanbechangetoFeatures.Parent = TabHolder
-SupportedgamesCanbechangetoFeatures.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SupportedgamesCanbechangetoFeatures.BackgroundTransparency = 1.000
-SupportedgamesCanbechangetoFeatures.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SupportedgamesCanbechangetoFeatures.BorderSizePixel = 0
-SupportedgamesCanbechangetoFeatures.Position = UDim2.new(0, 0, -0.0218181815, 0)
-SupportedgamesCanbechangetoFeatures.Size = UDim2.new(0, 121, 0, 50)
-SupportedgamesCanbechangetoFeatures.Font = Enum.Font.Unknown
-SupportedgamesCanbechangetoFeatures.Text = "Supported Games"
-SupportedgamesCanbechangetoFeatures.TextColor3 = Color3.fromRGB(255, 255, 255)
-SupportedgamesCanbechangetoFeatures.TextSize = 17.000
+Features.Name = "Features"
+Features.Parent = TabHolder
+Features.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Features.BackgroundTransparency = 1.000
+Features.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Features.BorderSizePixel = 0
+Features.Position = UDim2.new(0.297520667, 0, 0.0509090908, 0)
+Features.Size = UDim2.new(0, 48, 0, 12)
+Features.Font = Enum.Font.ArialBold
+Features.Text = "Features"
+Features.TextColor3 = Color3.fromRGB(255, 255, 255)
+Features.TextSize = 17.000
 
 Dash.Name = "Dash"
 Dash.Parent = TabHolder
@@ -122,7 +122,7 @@ TheForge.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TheForge.BorderSizePixel = 0
 TheForge.Position = UDim2.new(0, 0, 0.192727268, 0)
 TheForge.Size = UDim2.new(0, 121, 0, 33)
-TheForge.Font = Enum.Font.Unknown
+TheForge.Font = Enum.Font.Arial
 TheForge.Text = "The Forge(Beta)"
 TheForge.TextColor3 = Color3.fromRGB(177, 177, 177)
 TheForge.TextSize = 17.000
@@ -161,12 +161,23 @@ Dash_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Dash_2.BorderSizePixel = 0
 Dash_2.Position = UDim2.new(0.281059057, 0, 0.152727276, 0)
 Dash_2.Size = UDim2.new(0, 335, 0, 2)
-	
-	-- Behavior ONLY
-	MakeDraggable(Title, Main)
 
-	Exit.MouseButton1Click:Connect(function()
-		RynixHub:Destroy()
-	end)
+-- Behavior ONLY
+MakeDraggable(Title, Main)
+
+Exit.MouseButton1Click:Connect(function()
+	RynixHub:Destroy()
+end)
+
+-- Return references ONLY
+return {
+	Gui = RynixHub,
+	Main = Main,
+	Title = Title,
+	TabHolder = TabHolder,
+	TheForge = TheForge,
+	ContentLabel = UpdatelogsBasicallyatextlabelitis
+}
+end
 
 return Module
