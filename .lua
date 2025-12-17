@@ -1,3 +1,4 @@
+-- Rynix Hub Module
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
@@ -37,147 +38,168 @@ end
 
 -- ===== CREATE =====
 function Module.Create()
+	-- Instances:
+	local RynixHub = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local Title = Instance.new("TextLabel")
+	local UICorner = Instance.new("UICorner")
+	local TabHolder = Instance.new("Frame")
+	local UICorner_2 = Instance.new("UICorner")
+	local Features = Instance.new("TextLabel")
+	local Dash = Instance.new("Frame")
+	local TheForge = Instance.new("TextButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local Exit = Instance.new("TextButton")
+	local ContentLabel = Instance.new("TextLabel")
+	local Dash_2 = Instance.new("Frame")
 
--- Instances:
+	-- Properties:
+	RynixHub.Name = "RynixHub"
+	RynixHub.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+	RynixHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local RynixHub = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local UICorner = Instance.new("UICorner")
-local TabHolder = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-local Features = Instance.new("TextLabel")
-local Dash = Instance.new("Frame")
-local TheForge = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local Exit = Instance.new("TextButton")
-local UpdatelogsBasicallyatextlabelitis = Instance.new("TextLabel")
-local Dash_2 = Instance.new("Frame")
+	Main.Name = "Main"
+	Main.Parent = RynixHub
+	Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Main.BackgroundTransparency = 0.150
+	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.229, 0, 0.246, 0)
+	Main.Size = UDim2.new(0, 491, 0, 275)
 
---Properties:
+	Title.Name = "Title"
+	Title.Parent = Main
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0.1079, 0, -0.0545, 0)
+	Title.Size = UDim2.new(0, 491, 0, 68)
+	Title.Font = Enum.Font.ArialBold
+	Title.Text = "RYNIX HUB"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 34.000
 
-RynixHub.Name = "RynixHub"
-RynixHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-RynixHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	UICorner.Parent = Main
 
-Main.Name = "Main"
-Main.Parent = RynixHub
-Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Main.BackgroundTransparency = 0.150
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.229009151, 0, 0.246323526, 0)
-Main.Size = UDim2.new(0, 491, 0, 275)
+	TabHolder.Name = "TabHolder"
+	TabHolder.Parent = Main
+	TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	TabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabHolder.BorderSizePixel = 0
+	TabHolder.Size = UDim2.new(0, 121, 0, 275)
 
-Title.Name = "Title"
-Title.Parent = Main
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Title.BorderSizePixel = 0
-Title.Position = UDim2.new(0.107942976, 0, -0.0545454547, 0)
-Title.Size = UDim2.new(0, 491, 0, 68)
-Title.Font = Enum.Font.ArialBold
-Title.Text = "RYNIX HUB"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 34.000
+	UICorner_2.Parent = TabHolder
 
-UICorner.Parent = Main
+	Features.Name = "Features"
+	Features.Parent = TabHolder
+	Features.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Features.BackgroundTransparency = 1.000
+	Features.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Features.BorderSizePixel = 0
+	Features.Position = UDim2.new(0.2975, 0, 0.0509, 0)
+	Features.Size = UDim2.new(0, 48, 0, 12)
+	Features.Font = Enum.Font.ArialBold
+	Features.Text = "Features"
+	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Features.TextSize = 17.000
 
-TabHolder.Name = "TabHolder"
-TabHolder.Parent = Main
-TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-TabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TabHolder.BorderSizePixel = 0
-TabHolder.Size = UDim2.new(0, 121, 0, 275)
+	Dash.Name = "Dash"
+	Dash.Parent = TabHolder
+	Dash.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Dash.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Dash.BorderSizePixel = 0
+	Dash.Position = UDim2.new(0, 0, 0.1563, 0)
+	Dash.Size = UDim2.new(0, 121, 0, 2)
 
-UICorner_2.Parent = TabHolder
+	TheForge.Name = "TheForge"
+	TheForge.Parent = TabHolder
+	TheForge.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
+	TheForge.BackgroundTransparency = 1.000
+	TheForge.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TheForge.BorderSizePixel = 0
+	TheForge.Position = UDim2.new(0, 0, 0.1927, 0)
+	TheForge.Size = UDim2.new(0, 121, 0, 33)
+	TheForge.Font = Enum.Font.Arial
+	TheForge.Text = "The Forge(Beta)"
+	TheForge.TextColor3 = Color3.fromRGB(177, 177, 177)
+	TheForge.TextSize = 17.000
 
-Features.Name = "Features"
-Features.Parent = TabHolder
-Features.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Features.BackgroundTransparency = 1.000
-Features.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Features.BorderSizePixel = 0
-Features.Position = UDim2.new(0.297520667, 0, 0.0509090908, 0)
-Features.Size = UDim2.new(0, 48, 0, 12)
-Features.Font = Enum.Font.ArialBold
-Features.Text = "Features"
-Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Features.TextSize = 17.000
+	UICorner_3.Parent = TheForge
 
-Dash.Name = "Dash"
-Dash.Parent = TabHolder
-Dash.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Dash.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Dash.BorderSizePixel = 0
-Dash.Position = UDim2.new(0, 0, 0.156363636, 0)
-Dash.Size = UDim2.new(0, 121, 0, 2)
+	Exit.Name = "Exit"
+	Exit.Parent = Main
+	Exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Exit.BackgroundTransparency = 1.000
+	Exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Exit.BorderSizePixel = 0
+	Exit.Position = UDim2.new(0.9633, 0, 0.0327, 0)
+	Exit.Size = UDim2.new(0, 18, 0, 5)
+	Exit.Font = Enum.Font.SourceSansBold
+	Exit.Text = "X"
+	Exit.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Exit.TextSize = 28.000
 
-TheForge.Name = "TheForge"
-TheForge.Parent = TabHolder
-TheForge.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-TheForge.BackgroundTransparency = 1.000
-TheForge.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TheForge.BorderSizePixel = 0
-TheForge.Position = UDim2.new(0, 0, 0.192727268, 0)
-TheForge.Size = UDim2.new(0, 121, 0, 33)
-TheForge.Font = Enum.Font.Arial
-TheForge.Text = "The Forge(Beta)"
-TheForge.TextColor3 = Color3.fromRGB(177, 177, 177)
-TheForge.TextSize = 17.000
+	ContentLabel.Name = "UpdateLabel"
+	ContentLabel.Parent = Main
+	ContentLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ContentLabel.BackgroundTransparency = 1.000
+	ContentLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ContentLabel.BorderSizePixel = 0
+	ContentLabel.Position = UDim2.new(0.2810, 0, 0.1636, 0)
+	ContentLabel.Size = UDim2.new(0, 335, 0, 218)
+	ContentLabel.Font = Enum.Font.SourceSansBold
+	ContentLabel.TextColor3 = Color3.fromRGB(252, 252, 252)
+	ContentLabel.TextSize = 25.000
 
-UICorner_3.Parent = TheForge
+	Dash_2.Name = "Dash"
+	Dash_2.Parent = Main
+	Dash_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Dash_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Dash_2.BorderSizePixel = 0
+	Dash_2.Position = UDim2.new(0.2810, 0, 0.1527, 0)
+	Dash_2.Size = UDim2.new(0, 335, 0, 2)
 
-Exit.Name = "Exit"
-Exit.Parent = Main
-Exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Exit.BackgroundTransparency = 1.000
-Exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Exit.BorderSizePixel = 0
-Exit.Position = UDim2.new(0.963340104, 0, 0.0327272713, 0)
-Exit.Size = UDim2.new(0, 18, 0, 5)
-Exit.Font = Enum.Font.SourceSansBold
-Exit.Text = "X"
-Exit.TextColor3 = Color3.fromRGB(255, 255, 255)
-Exit.TextSize = 28.000
+	-- Make draggable
+	MakeDraggable(Title, Main)
 
-UpdatelogsBasicallyatextlabelitis.Name = "Update logs(Basically a textlabel it is)"
-UpdatelogsBasicallyatextlabelitis.Parent = Main
-UpdatelogsBasicallyatextlabelitis.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-UpdatelogsBasicallyatextlabelitis.BackgroundTransparency = 1.000
-UpdatelogsBasicallyatextlabelitis.BorderColor3 = Color3.fromRGB(0, 0, 0)
-UpdatelogsBasicallyatextlabelitis.BorderSizePixel = 0
-UpdatelogsBasicallyatextlabelitis.Position = UDim2.new(0.281059057, 0, 0.163636357, 0)
-UpdatelogsBasicallyatextlabelitis.Size = UDim2.new(0, 335, 0, 218)
-UpdatelogsBasicallyatextlabelitis.Font = Enum.Font.SourceSansBold
-UpdatelogsBasicallyatextlabelitis.TextColor3 = Color3.fromRGB(252, 252, 252)
-UpdatelogsBasicallyatextlabelitis.TextSize = 25.000
+	-- Exit button
+	Exit.MouseButton1Click:Connect(function()
+		RynixHub:Destroy()
+	end)
 
-Dash_2.Name = "Dash"
-Dash_2.Parent = Main
-Dash_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Dash_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Dash_2.BorderSizePixel = 0
-Dash_2.Position = UDim2.new(0.281059057, 0, 0.152727276, 0)
-Dash_2.Size = UDim2.new(0, 335, 0, 2)
+	-- ===== HELPER FUNCTIONS =====
 
--- Behavior ONLY
-MakeDraggable(Title, Main)
+	local function AddButton(name, callback)
+		local Btn = Instance.new("TextButton")
+		Btn.Parent = Main
+		Btn.Size = UDim2.new(0, 150, 0, 35)
+		Btn.Position = UDim2.new(0, 20, 0, 50 + (#Main:GetChildren() * 40)) -- stacked
+		Btn.Text = name
+		Btn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+		Btn.TextColor3 = Color3.fromRGB(255,255,255)
+		Btn.BorderSizePixel = 0
+		Btn.Font = Enum.Font.SourceSansBold
+		Btn.TextSize = 18
+		Btn.MouseButton1Click:Connect(callback)
+		return Btn
+	end
 
-Exit.MouseButton1Click:Connect(function()
-	RynixHub:Destroy()
-end)
+	local function UpdateLabel(text)
+		ContentLabel.Text = text
+	end
 
--- Return references ONLY
-return {
-	Gui = RynixHub,
-	Main = Main,
-	Title = Title,
-	TabHolder = TabHolder,
-	TheForge = TheForge,
-	ContentLabel = UpdatelogsBasicallyatextlabelitis
-}
+	-- Return everything
+	return {
+		Gui = RynixHub,
+		Main = Main,
+		Title = Title,
+		TabHolder = TabHolder,
+		TheForge = TheForge,
+		ContentLabel = ContentLabel,
+		AddButton = AddButton,
+		UpdateLabel = UpdateLabel
+	}
 end
 
 return Module
