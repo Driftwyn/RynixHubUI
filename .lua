@@ -1,10 +1,9 @@
--- Rynix Hub Module
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
 local Module = {}
 
--- ===== DRAG (NON-DESTRUCTIVE) =====
+-- ===== DRAG =====
 local function MakeDraggable(dragHandle, frame)
 	local dragging = false
 	local dragStart, startPos
@@ -38,7 +37,6 @@ end
 
 -- ===== CREATE =====
 function Module.Create()
-	-- Instances:
 	local RynixHub = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
@@ -51,7 +49,7 @@ function Module.Create()
 	local ContentLabel = Instance.new("TextLabel")
 	local Dash_2 = Instance.new("Frame")
 
-	-- Properties:
+	-- GUI Setup
 	RynixHub.Name = "RynixHub"
 	RynixHub.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
 	RynixHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -59,121 +57,105 @@ function Module.Create()
 	Main.Name = "Main"
 	Main.Parent = RynixHub
 	Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	Main.BackgroundTransparency = 0.150
-	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main.BackgroundTransparency = 0.15
 	Main.BorderSizePixel = 0
 	Main.Position = UDim2.new(0.229, 0, 0.246, 0)
 	Main.Size = UDim2.new(0, 491, 0, 275)
 
 	Title.Name = "Title"
 	Title.Parent = Main
-	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title.BackgroundTransparency = 1.000
-	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Title.BorderSizePixel = 0
-	Title.Position = UDim2.new(0.1079, 0, -0.0545, 0)
+	Title.BackgroundTransparency = 1
+	Title.Position = UDim2.new(0.107, 0, -0.054, 0)
 	Title.Size = UDim2.new(0, 491, 0, 68)
 	Title.Font = Enum.Font.ArialBold
 	Title.Text = "RYNIX HUB"
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title.TextSize = 34.000
+	Title.TextSize = 34
 
 	UICorner.Parent = Main
 
 	TabHolder.Name = "TabHolder"
 	TabHolder.Parent = Main
 	TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-	TabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TabHolder.BorderSizePixel = 0
 	TabHolder.Size = UDim2.new(0, 121, 0, 275)
-
 	UICorner_2.Parent = TabHolder
 
 	Features.Name = "Features"
 	Features.Parent = TabHolder
-	Features.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Features.BackgroundTransparency = 1.000
-	Features.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Features.BorderSizePixel = 0
-	Features.Position = UDim2.new(0.2975, 0, 0.0509, 0)
+	Features.BackgroundTransparency = 1
+	Features.Position = UDim2.new(0.297, 0, 0.05, 0)
 	Features.Size = UDim2.new(0, 48, 0, 12)
 	Features.Font = Enum.Font.ArialBold
 	Features.Text = "Features"
 	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Features.TextSize = 17.000
+	Features.TextSize = 17
 
 	Dash.Name = "Dash"
 	Dash.Parent = TabHolder
 	Dash.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Dash.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Dash.BorderSizePixel = 0
-	Dash.Position = UDim2.new(0, 0, 0.1563, 0)
+	Dash.Position = UDim2.new(0, 0, 0.156, 0)
 	Dash.Size = UDim2.new(0, 121, 0, 2)
 
 	Exit.Name = "Exit"
 	Exit.Parent = Main
-	Exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Exit.BackgroundTransparency = 1.000
-	Exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Exit.BorderSizePixel = 0
-	Exit.Position = UDim2.new(0.9633, 0, 0.0327, 0)
+	Exit.BackgroundTransparency = 1
+	Exit.Position = UDim2.new(0.963, 0, 0.032, 0)
 	Exit.Size = UDim2.new(0, 18, 0, 5)
 	Exit.Font = Enum.Font.SourceSansBold
 	Exit.Text = "X"
 	Exit.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Exit.TextSize = 28.000
+	Exit.TextSize = 28
 
 	ContentLabel.Name = "UpdateLabel"
 	ContentLabel.Parent = Main
-	ContentLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	ContentLabel.BackgroundTransparency = 1.000
-	ContentLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	ContentLabel.BorderSizePixel = 0
-	ContentLabel.Position = UDim2.new(0.2810, 0, 0.1636, 0)
+	ContentLabel.BackgroundTransparency = 1
+	ContentLabel.Position = UDim2.new(0.281, 0, 0.163, 0)
 	ContentLabel.Size = UDim2.new(0, 335, 0, 218)
 	ContentLabel.Font = Enum.Font.SourceSansBold
 	ContentLabel.TextColor3 = Color3.fromRGB(252, 252, 252)
-	ContentLabel.TextSize = 25.000
+	ContentLabel.TextSize = 25
 
 	Dash_2.Name = "Dash"
 	Dash_2.Parent = Main
 	Dash_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Dash_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Dash_2.BorderSizePixel = 0
-	Dash_2.Position = UDim2.new(0.2810, 0, 0.1527, 0)
+	Dash_2.Position = UDim2.new(0.281, 0, 0.152, 0)
 	Dash_2.Size = UDim2.new(0, 335, 0, 2)
 
-	-- Make draggable
+	-- Draggable
 	MakeDraggable(Title, Main)
 
-	-- Exit button
 	Exit.MouseButton1Click:Connect(function()
 		RynixHub:Destroy()
 	end)
 
-	-- ===== HELPER FUNCTIONS =====
+	-- Dynamic Buttons Table
 	local buttons = {}
 
+	-- Update positions dynamically
 	local function UpdateButtonPositions()
 		for i, btn in ipairs(buttons) do
-			btn.Position = UDim2.new(0, 0, 0.1927 + 0.05 * i, 0)
+			btn.Position = UDim2.new(0, 0, 0.1927 + (i-1) * 0.05, 0)
 		end
 	end
 
+	-- Add a button
 	local function AddButton(name, callback)
 		local Btn = Instance.new("TextButton")
 		local UICornerBtn = Instance.new("UICorner")
 		Btn.Name = name
 		Btn.Parent = TabHolder
 		Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-		Btn.BackgroundTransparency = 1.000
+		Btn.BackgroundTransparency = 1
 		Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Btn.BorderSizePixel = 0
 		Btn.Size = UDim2.new(0, 121, 0, 33)
 		Btn.Font = Enum.Font.Arial
 		Btn.Text = name
 		Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
-		Btn.TextSize = 17.000
+		Btn.TextSize = 17
 		UICornerBtn.Parent = Btn
 		Btn.MouseButton1Click:Connect(callback)
 		table.insert(buttons, Btn)
