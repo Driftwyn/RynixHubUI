@@ -86,7 +86,7 @@ function Module.Create()
 	Features.BackgroundTransparency = 1
 	Features.Position = UDim2.new(0.297, 0, 0.05, 0)
 	Features.Size = UDim2.new(0, 48, 0, 12)
-	Features.Font = Enum.Font.ArialBold
+	Features.Font = Enum.Font.Fondamento
 	Features.Text = "Features"
 	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Features.TextSize = 17
@@ -113,7 +113,7 @@ function Module.Create()
 	ContentLabel.BackgroundTransparency = 1
 	ContentLabel.Position = UDim2.new(0.281, 0, 0.163, 0)
 	ContentLabel.Size = UDim2.new(0, 335, 0, 218)
-	ContentLabel.Font = Enum.Font.SourceSansBold
+	ContentLabel.Font = Enum.Font.Fondamento
 	ContentLabel.TextColor3 = Color3.fromRGB(252, 252, 252)
 	ContentLabel.TextSize = 25
 
