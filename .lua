@@ -47,8 +47,6 @@ function Module.Create()
 	local UICorner_2 = Instance.new("UICorner")
 	local Features = Instance.new("TextLabel")
 	local Dash = Instance.new("Frame")
-	local TheForge = Instance.new("TextButton")
-	local UICorner_3 = Instance.new("UICorner")
 	local Exit = Instance.new("TextButton")
 	local ContentLabel = Instance.new("TextLabel")
 	local Dash_2 = Instance.new("Frame")
@@ -112,21 +110,6 @@ function Module.Create()
 	Dash.Position = UDim2.new(0, 0, 0.1563, 0)
 	Dash.Size = UDim2.new(0, 121, 0, 2)
 
-	TheForge.Name = "TheForge"
-	TheForge.Parent = TabHolder
-	TheForge.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-	TheForge.BackgroundTransparency = 1.000
-	TheForge.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TheForge.BorderSizePixel = 0
-	TheForge.Position = UDim2.new(0, 0, 0.1927, 0)
-	TheForge.Size = UDim2.new(0, 121, 0, 33)
-	TheForge.Font = Enum.Font.Arial
-	TheForge.Text = "The Forge(Beta)"
-	TheForge.TextColor3 = Color3.fromRGB(177, 177, 177)
-	TheForge.TextSize = 17.000
-
-	UICorner_3.Parent = TheForge
-
 	Exit.Name = "Exit"
 	Exit.Parent = Main
 	Exit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -169,19 +152,32 @@ function Module.Create()
 	end)
 
 	-- ===== HELPER FUNCTIONS =====
+	local buttons = {}
+
+	local function UpdateButtonPositions()
+		for i, btn in ipairs(buttons) do
+			btn.Position = UDim2.new(0, 0, 0.1927 + 0.05 * i, 0)
+		end
+	end
 
 	local function AddButton(name, callback)
 		local Btn = Instance.new("TextButton")
-		Btn.Parent = Main
-		Btn.Size = UDim2.new(0, 150, 0, 35)
-		Btn.Position = UDim2.new(0, 20, 0, 50 + (#Main:GetChildren() * 40)) -- stacked
-		Btn.Text = name
-		Btn.BackgroundColor3 = Color3.fromRGB(50,50,50)
-		Btn.TextColor3 = Color3.fromRGB(255,255,255)
+		local UICornerBtn = Instance.new("UICorner")
+		Btn.Name = name
+		Btn.Parent = TabHolder
+		Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
+		Btn.BackgroundTransparency = 1.000
+		Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Btn.BorderSizePixel = 0
-		Btn.Font = Enum.Font.SourceSansBold
-		Btn.TextSize = 18
+		Btn.Size = UDim2.new(0, 121, 0, 33)
+		Btn.Font = Enum.Font.Arial
+		Btn.Text = name
+		Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
+		Btn.TextSize = 17.000
+		UICornerBtn.Parent = Btn
 		Btn.MouseButton1Click:Connect(callback)
+		table.insert(buttons, Btn)
+		UpdateButtonPositions()
 		return Btn
 	end
 
@@ -189,13 +185,11 @@ function Module.Create()
 		ContentLabel.Text = text
 	end
 
-	-- Return everything
 	return {
 		Gui = RynixHub,
 		Main = Main,
 		Title = Title,
 		TabHolder = TabHolder,
-		TheForge = TheForge,
 		ContentLabel = ContentLabel,
 		AddButton = AddButton,
 		UpdateLabel = UpdateLabel
