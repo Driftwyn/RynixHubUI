@@ -86,13 +86,10 @@ function Module.Create()
 	Features.BackgroundTransparency = 1
 	Features.Position = UDim2.new(0.297, 0, 0.05, 0)
 	Features.Size = UDim2.new(0, 48, 0, 12)
-	Features.Font = Enum.Font.Fondamento
+	Features.Font = Enum.Font.ArialBold
 	Features.Text = "Features"
 	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Features.TextSize = 17
-	-- Make it appear bolder
-	Features.TextStrokeTransparency = 0  -- adds an outline, making it look bold
-	Features.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)  -- optional: black outline
 
 	Dash.Name = "Dash"
 	Dash.Parent = TabHolder
