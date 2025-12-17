@@ -152,7 +152,7 @@ function Module.Create()
 		Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Btn.BorderSizePixel = 0
 		Btn.Size = UDim2.new(0, 121, 0, 33)
-		Btn.Font = Enum.Font.Arial
+		Btn.Font = Enum.Font.Fondamento
 		Btn.Text = name
 		Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
 		Btn.TextSize = 17
