@@ -169,15 +169,4 @@ Dash_2.Size = UDim2.new(0, 335, 0, 2)
 		RynixHub:Destroy()
 	end)
 
-	-- Return references ONLY
-	return {
-		Gui = RynixHub,
-		Main = Main,
-		Title = Title,
-		TabHolder = TabHolder,
-		TheForge = TheForge,
-		ContentLabel = UpdatelogsBasicallyatextlabelitis
-	}
-end
-
 return Module
