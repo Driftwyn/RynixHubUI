@@ -136,45 +136,47 @@ function Module.Create()
 
 	-- Update positions dynamically
 	local function UpdateButtonPositions()
+		local baseY = 0.1927   -- starting Y position
+		local spacing = 0.08   -- space between buttons
+
 		for i, btn in ipairs(buttons) do
-			btn.Position = UDim2.new(0, 0, 0.1927 + (i-1) * 0.08, 0)
+			btn.Position = UDim2.new(0, 0, baseY + (i-1) * spacing, 0)
 		end
 	end
 
+	-- Add a button with hover effect
 	local function AddButton(name, callback)
-	local Btn = Instance.new("TextButton")
-	local UICornerBtn = Instance.new("UICorner")
-	Btn.Name = name
-	Btn.Parent = TabHolder
-	Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-	Btn.BackgroundTransparency = 1
-	Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Btn.BorderSizePixel = 0
-	Btn.Size = UDim2.new(0, 121, 0, 33)
-	Btn.Font = Enum.Font.Arial
-	Btn.Text = name
-	Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
-	Btn.TextSize = 17
-	UICornerBtn.Parent = Btn
-
-	-- Hover effect
-	Btn.MouseEnter:Connect(function()
-		Btn.BackgroundTransparency = 0.5      -- make background visible
-		Btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- example: red hover
-	end)
-
-	Btn.MouseLeave:Connect(function()
-		Btn.BackgroundTransparency = 1        -- revert to original
+		local Btn = Instance.new("TextButton")
+		local UICornerBtn = Instance.new("UICorner")
+		Btn.Name = name
+		Btn.Parent = TabHolder
 		Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-	end)
+		Btn.BackgroundTransparency = 1
+		Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Btn.BorderSizePixel = 0
+		Btn.Size = UDim2.new(0, 121, 0, 33)
+		Btn.Font = Enum.Font.Arial
+		Btn.Text = name
+		Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
+		Btn.TextSize = 17
+		UICornerBtn.Parent = Btn
 
-	Btn.MouseButton1Click:Connect(callback)
+		-- Hover effect
+		Btn.MouseEnter:Connect(function()
+			Btn.BackgroundTransparency = 0.5
+			Btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- red hover
+		end)
+		Btn.MouseLeave:Connect(function()
+			Btn.BackgroundTransparency = 1
+			Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
+		end)
 
-	table.insert(buttons, Btn)
-	UpdateButtonPositions()
-	return Btn
-end
-	
+		Btn.MouseButton1Click:Connect(callback)
+		table.insert(buttons, Btn)
+		UpdateButtonPositions()
+		return Btn
+	end
+
 	local function UpdateLabel(text)
 		ContentLabel.Text = text
 	end
