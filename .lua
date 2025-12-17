@@ -160,9 +160,25 @@ function Module.Create()
 		Btn.MouseButton1Click:Connect(callback)
 		table.insert(buttons, Btn)
 		UpdateButtonPositions()
-		return Btn
-	end
 
+		-- Hover effect
+	Btn.MouseEnter:Connect(function()
+		Btn.BackgroundTransparency = 0.5      -- make background visible
+		Btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- example: red hover
+	end)
+
+	Btn.MouseLeave:Connect(function()
+		Btn.BackgroundTransparency = 1        -- revert to original
+		Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
+	end)
+
+	Btn.MouseButton1Click:Connect(callback)
+
+	table.insert(buttons, Btn)
+	UpdateButtonPositions()
+	return Btn
+end
+	
 	local function UpdateLabel(text)
 		ContentLabel.Text = text
 	end
