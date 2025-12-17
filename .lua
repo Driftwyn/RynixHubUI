@@ -90,6 +90,9 @@ function Module.Create()
 	Features.Text = "Features"
 	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Features.TextSize = 17
+	-- Make it appear bolder
+	Features.TextStrokeTransparency = 0  -- adds an outline, making it look bold
+	Features.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)  -- optional: black outline
 
 	Dash.Name = "Dash"
 	Dash.Parent = TabHolder
