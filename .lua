@@ -67,7 +67,7 @@ function Module.Create()
 	Title.BackgroundTransparency = 1
 	Title.Position = UDim2.new(0.107, 0, -0.054, 0)
 	Title.Size = UDim2.new(0, 491, 0, 68)
-	Title.Font = Enum.Font.ArialBold
+	Title.Font = Enum.Font.FondamentoBold
 	Title.Text = "RYNIX HUB"
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextSize = 34
