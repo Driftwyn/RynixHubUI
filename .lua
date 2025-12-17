@@ -1,45 +1,101 @@
--- RynixHub UI (Executor Module)
--- The Forge is a TAB
--- loadstring compatible
+-- Rynix Hub UI Module
+-- Executor-compatible
+-- Tabs + Draggable
+-- Converted & structured by Driftwyn
 
-local RynixHubUI = {}
-RynixHubUI.__index = RynixHubUI
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
 
-function RynixHubUI:Create(parent)
-    parent = parent or game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local Library = {}
+Library.__index = Library
 
-    -- =========================
-    -- GUI
-    -- =========================
-    local Gui = Instance.new("ScreenGui")
-    Gui.Name = "RynixHub"
-    Gui.Parent = parent
+-- =========================
+-- DRAG FUNCTION
+-- =========================
+local function makeDraggable(topbar, frame)
+    local dragging, dragStart, startPos
 
-    local Main = Instance.new("Frame", Gui)
-    Main.BackgroundColor3 = Color3.fromRGB(0,0,0)
-    Main.BackgroundTransparency = 0.15
-    Main.BorderSizePixel = 0
-    Main.Position = UDim2.new(0.229,0,0.246,0)
-    Main.Size = UDim2.new(0,491,0,275)
-    Instance.new("UICorner", Main)
+    topbar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+        end
+    end)
 
-    local Title = Instance.new("TextLabel", Main)
-    Title.BackgroundTransparency = 1
-    Title.Position = UDim2.new(0.108,0,-0.055,0)
-    Title.Size = UDim2.new(0,491,0,68)
-    Title.Text = "RYNIX HUB"
-    Title.TextColor3 = Color3.fromRGB(255,255,255)
-    Title.TextSize = 34
-    Title.Font = Enum.Font.Unknown
+    topbar.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
 
-    -- Tabs
-    local TabHolder = Instance.new("Frame", Main)
-    TabHolder.BackgroundColor3 = Color3.fromRGB(40,40,40)
-    TabHolder.BorderSizePixel = 0
-    TabHolder.Size = UDim2.new(0,121,0,275)
-    Instance.new("UICorner", TabHolder)
+    UIS.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(
+                startPos.X.Scale,
+                startPos.X.Offset + delta.X,
+                startPos.Y.Scale,
+                startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
 
-    local Header = Instance.new("TextLabel", TabHolder)
+-- =========================
+-- CREATE UI
+-- =========================
+function Library:Create()
+    local self = setmetatable({}, Library)
+
+    -- ScreenGui
+    self.Gui = Instance.new("ScreenGui")
+    self.Gui.Name = "RynixHub"
+    self.Gui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Main
+    self.Main = Instance.new("Frame", self.Gui)
+    self.Main.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    self.Main.BackgroundTransparency = 0.15
+    self.Main.BorderSizePixel = 0
+    self.Main.Position = UDim2.new(0.229,0,0.246,0)
+    self.Main.Size = UDim2.new(0,491,0,275)
+    Instance.new("UICorner", self.Main)
+
+    -- Title (drag handle)
+    self.Title = Instance.new("TextLabel", self.Main)
+    self.Title.BackgroundTransparency = 1
+    self.Title.Position = UDim2.new(0.108,0,-0.055,0)
+    self.Title.Size = UDim2.new(0,491,0,68)
+    self.Title.Text = "RYNIX HUB"
+    self.Title.TextColor3 = Color3.fromRGB(255,255,255)
+    self.Title.TextSize = 34
+    self.Title.Font = Enum.Font.Unknown
+
+    makeDraggable(self.Title, self.Main)
+
+    -- Exit
+    self.Exit = Instance.new("TextButton", self.Main)
+    self.Exit.BackgroundTransparency = 1
+    self.Exit.Position = UDim2.new(0.963,0,0.033,0)
+    self.Exit.Size = UDim2.new(0,18,0,5)
+    self.Exit.Text = "X"
+    self.Exit.TextColor3 = Color3.fromRGB(255,255,255)
+    self.Exit.TextSize = 28
+    self.Exit.Font = Enum.Font.SourceSansBold
+
+    self.Exit.MouseButton1Click:Connect(function()
+        self.Gui:Destroy()
+    end)
+
+    -- Tab Holder
+    self.TabHolder = Instance.new("Frame", self.Main)
+    self.TabHolder.BackgroundColor3 = Color3.fromRGB(40,40,40)
+    self.TabHolder.BorderSizePixel = 0
+    self.TabHolder.Size = UDim2.new(0,121,0,275)
+    Instance.new("UICorner", self.TabHolder)
+
+    local Header = Instance.new("TextLabel", self.TabHolder)
     Header.BackgroundTransparency = 1
     Header.Size = UDim2.new(1,0,0,50)
     Header.Text = "Supported Games"
@@ -47,70 +103,87 @@ function RynixHubUI:Create(parent)
     Header.TextSize = 17
     Header.Font = Enum.Font.Unknown
 
-    local ContentHolder = Instance.new("Frame", Main)
-    ContentHolder.BackgroundTransparency = 1
-    ContentHolder.Position = UDim2.new(0.281,0,0.153,0)
-    ContentHolder.Size = UDim2.new(0,335,0,222)
+    -- Content Holder
+    self.ContentHolder = Instance.new("Frame", self.Main)
+    self.ContentHolder.BackgroundTransparency = 1
+    self.ContentHolder.Position = UDim2.new(0.281,0,0.153,0)
+    self.ContentHolder.Size = UDim2.new(0,335,0,222)
 
-    -- =========================
-    -- TAB SYSTEM
-    -- =========================
-    local Tabs = {}
+    self.Tabs = {}
+    self.TabCount = 0
 
-    local function createTab(name, order)
-        local Button = Instance.new("TextButton", TabHolder)
-        Button.BackgroundTransparency = 1
-        Button.Position = UDim2.new(0,0,0.193 + (order * 0.12),0)
-        Button.Size = UDim2.new(1,0,0,33)
-        Button.Text = name
-        Button.TextColor3 = Color3.fromRGB(177,177,177)
-        Button.TextSize = 17
-        Button.Font = Enum.Font.Unknown
-        Instance.new("UICorner", Button)
-
-        local Content = Instance.new("Frame", ContentHolder)
-        Content.Size = UDim2.new(1,0,1,0)
-        Content.Visible = false
-        Content.BackgroundTransparency = 1
-
-        Tabs[name] = {Button = Button, Content = Content}
-        return Tabs[name]
-    end
-
-    local function switchTab(tabName)
-        for name, tab in pairs(Tabs) do
-            local active = (name == tabName)
-            tab.Content.Visible = active
-            tab.Button.TextColor3 = active
-                and Color3.fromRGB(255,255,255)
-                or Color3.fromRGB(177,177,177)
-        end
-    end
-
-    -- =========================
-    -- FORGE TAB
-    -- =========================
-    local Forge = createTab("The Forge (Beta)", 0)
-
-    local Label = Instance.new("TextLabel", Forge.Content)
-    Label.Size = UDim2.new(1,0,1,0)
-    Label.BackgroundTransparency = 1
-    Label.Text = "The Forge Content"
-    Label.TextColor3 = Color3.fromRGB(255,255,255)
-    Label.TextSize = 25
-    Label.Font = Enum.Font.SourceSansBold
-
-    Forge.Button.MouseButton1Click:Connect(function()
-        switchTab("The Forge (Beta)")
-    end)
-
-    switchTab("The Forge (Beta)")
-
-    return {
-        Gui = Gui,
-        Tabs = Tabs,
-        SwitchTab = switchTab
-    }
+    return self
 end
 
-return setmetatable({}, RynixHubUI)
+-- =========================
+-- CREATE TAB
+-- =========================
+function Library:CreateTab(name)
+    self.TabCount += 1
+
+    local Button = Instance.new("TextButton", self.TabHolder)
+    Button.BackgroundTransparency = 1
+    Button.Position = UDim2.new(0,0,0.19 + (self.TabCount-1)*0.12,0)
+    Button.Size = UDim2.new(1,0,0,33)
+    Button.Text = name
+    Button.TextColor3 = Color3.fromRGB(177,177,177)
+    Button.TextSize = 17
+    Button.Font = Enum.Font.Unknown
+    Instance.new("UICorner", Button)
+
+    local Page = Instance.new("Frame", self.ContentHolder)
+    Page.Size = UDim2.new(1,0,1,0)
+    Page.Visible = false
+    Page.BackgroundTransparency = 1
+
+    Button.MouseButton1Click:Connect(function()
+        self:SwitchTab(name)
+    end)
+
+    self.Tabs[name] = {
+        Button = Button,
+        Page = Page
+    }
+
+    if self.TabCount == 1 then
+        self:SwitchTab(name)
+    end
+
+    return Page
+end
+
+-- =========================
+-- SWITCH TAB
+-- =========================
+function Library:SwitchTab(name)
+    for tabName, tab in pairs(self.Tabs) do
+        local active = tabName == name
+        tab.Page.Visible = active
+        tab.Button.TextColor3 = active
+            and Color3.fromRGB(255,255,255)
+            or Color3.fromRGB(177,177,177)
+    end
+end
+
+-- =========================
+-- CREATE BUTTON
+-- =========================
+function Library:CreateButton(tabPage, text, callback)
+    local Button = Instance.new("TextButton", tabPage)
+    Button.Size = UDim2.new(1,-10,0,40)
+    Button.Position = UDim2.new(0,5,0,5 + (#tabPage:GetChildren()-1)*45,0)
+    Button.BackgroundColor3 = Color3.fromRGB(25,25,25)
+    Button.Text = text
+    Button.TextColor3 = Color3.fromRGB(255,255,255)
+    Button.TextSize = 16
+    Button.Font = Enum.Font.SourceSansBold
+    Instance.new("UICorner", Button)
+
+    Button.MouseButton1Click:Connect(function()
+        pcall(callback)
+    end)
+
+    return Button
+end
+
+return Library
