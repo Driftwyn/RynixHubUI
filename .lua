@@ -137,7 +137,7 @@ function Module.Create()
 	-- Update positions dynamically
 	local function UpdateButtonPositions()
 		for i, btn in ipairs(buttons) do
-			btn.Position = UDim2.new(0, 0, 0.19 + (i - 1) * 0.13, 0)
+			btn.Position = UDim2.new(0, 0, 0.1927 + (i-1) * 0.05, 0)
 		end
 	end
 
@@ -160,13 +160,6 @@ function Module.Create()
 		Btn.MouseButton1Click:Connect(callback)
 		table.insert(buttons, Btn)
 		UpdateButtonPositions()
-		Btn.MouseEnter:Connect(function()
-	Btn.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
-end)
-
-Btn.MouseLeave:Connect(function()
-	Btn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-end)
 		return Btn
 	end
 
