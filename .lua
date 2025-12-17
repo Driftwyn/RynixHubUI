@@ -1,5 +1,6 @@
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
 local Module = {}
 
@@ -56,11 +57,14 @@ function Module.Create()
 
 	Main.Name = "Main"
 	Main.Parent = RynixHub
-	Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	Main.BackgroundTransparency = 0.15
+	Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	Main.BackgroundTransparency = 0.1
 	Main.BorderSizePixel = 0
 	Main.Position = UDim2.new(0.229, 0, 0.246, 0)
 	Main.Size = UDim2.new(0, 491, 0, 275)
+
+	UICorner.CornerRadius = UDim.new(0, 12)
+	UICorner.Parent = Main
 
 	Title.Name = "Title"
 	Title.Parent = Main
@@ -71,57 +75,58 @@ function Module.Create()
 	Title.Text = "RYNIX HUB"
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextSize = 34
-
-	UICorner.Parent = Main
+	Title.TextStrokeTransparency = 0.8
 
 	TabHolder.Name = "TabHolder"
 	TabHolder.Parent = Main
 	TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 	TabHolder.BorderSizePixel = 0
-	TabHolder.Size = UDim2.new(0, 121, 0, 275)
+	TabHolder.Size = UDim2.new(0, 140, 0, 275)
+	UICorner_2.CornerRadius = UDim.new(0, 10)
 	UICorner_2.Parent = TabHolder
 
 	Features.Name = "Features"
 	Features.Parent = TabHolder
 	Features.BackgroundTransparency = 1
-	Features.Position = UDim2.new(0.297, 0, 0.05, 0)
-	Features.Size = UDim2.new(0, 48, 0, 12)
+	Features.Position = UDim2.new(0.15, 0, 0.03, 0)
+	Features.Size = UDim2.new(0, 100, 0, 20)
 	Features.Font = Enum.Font.ArialBold
 	Features.Text = "Features"
 	Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Features.TextSize = 17
+	Features.TextSize = 18
 
 	Dash.Name = "Dash"
 	Dash.Parent = TabHolder
-	Dash.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Dash.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 	Dash.BorderSizePixel = 0
-	Dash.Position = UDim2.new(0, 0, 0.156, 0)
-	Dash.Size = UDim2.new(0, 121, 0, 2)
+	Dash.Position = UDim2.new(0, 0, 0.1, 0)
+	Dash.Size = UDim2.new(0, 140, 0, 2)
 
 	Exit.Name = "Exit"
 	Exit.Parent = Main
 	Exit.BackgroundTransparency = 1
-	Exit.Position = UDim2.new(0.963, 0, 0.032, 0)
-	Exit.Size = UDim2.new(0, 18, 0, 5)
+	Exit.Position = UDim2.new(0.95, 0, 0.02, 0)
+	Exit.Size = UDim2.new(0, 25, 0, 25)
 	Exit.Font = Enum.Font.SourceSansBold
 	Exit.Text = "X"
-	Exit.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Exit.TextSize = 28
+	Exit.TextColor3 = Color3.fromRGB(255, 0, 0)
+	Exit.TextSize = 30
 
 	ContentLabel.Name = "UpdateLabel"
 	ContentLabel.Parent = Main
 	ContentLabel.BackgroundTransparency = 1
-	ContentLabel.Position = UDim2.new(0.281, 0, 0.163, 0)
+	ContentLabel.Position = UDim2.new(0.3, 0, 0.18, 0)
 	ContentLabel.Size = UDim2.new(0, 335, 0, 218)
 	ContentLabel.Font = Enum.Font.SourceSansBold
 	ContentLabel.TextColor3 = Color3.fromRGB(252, 252, 252)
 	ContentLabel.TextSize = 25
+	ContentLabel.TextWrapped = true
 
 	Dash_2.Name = "Dash"
 	Dash_2.Parent = Main
-	Dash_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Dash_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 	Dash_2.BorderSizePixel = 0
-	Dash_2.Position = UDim2.new(0.281, 0, 0.152, 0)
+	Dash_2.Position = UDim2.new(0.3, 0, 0.16, 0)
 	Dash_2.Size = UDim2.new(0, 335, 0, 2)
 
 	-- Draggable
@@ -133,42 +138,40 @@ function Module.Create()
 
 	-- Dynamic Buttons Table
 	local buttons = {}
+	local baseY = 0.15
+	local spacing = 0.09
 
-	-- Update positions dynamically
 	local function UpdateButtonPositions()
-		local baseY = 0.1927   -- starting Y position
-		local spacing = 0.08   -- space between buttons
-
 		for i, btn in ipairs(buttons) do
-			btn.Position = UDim2.new(0, 0, baseY + (i-1) * spacing, 0)
+			btn.Position = UDim2.new(0, 0, baseY + (i - 1) * spacing, 0)
 		end
 	end
 
-	-- Add a button with hover effect
+	-- Add a button with smooth hover effect
 	local function AddButton(name, callback)
 		local Btn = Instance.new("TextButton")
 		local UICornerBtn = Instance.new("UICorner")
 		Btn.Name = name
 		Btn.Parent = TabHolder
-		Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
-		Btn.BackgroundTransparency = 1
-		Btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Btn.BorderSizePixel = 0
-		Btn.Size = UDim2.new(0, 121, 0, 33)
+		Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+		Btn.Size = UDim2.new(0, 140, 0, 35)
 		Btn.Font = Enum.Font.Arial
 		Btn.Text = name
-		Btn.TextColor3 = Color3.fromRGB(177, 177, 177)
-		Btn.TextSize = 17
+		Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Btn.TextSize = 16
+		UICornerBtn.CornerRadius = UDim.new(0, 8)
 		UICornerBtn.Parent = Btn
 
-		-- Hover effect
+		-- Hover effect with TweenService
+		local hoverTweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+		local hoverTween = TweenService:Create(Btn, hoverTweenInfo, {BackgroundColor3 = Color3.fromRGB(255, 0, 0)})
+		local leaveTween = TweenService:Create(Btn, hoverTweenInfo, {BackgroundColor3 = Color3.fromRGB(50, 50, 50)})
+
 		Btn.MouseEnter:Connect(function()
-			Btn.BackgroundTransparency = 0.5
-			Btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- red hover
+			hoverTween:Play()
 		end)
 		Btn.MouseLeave:Connect(function()
-			Btn.BackgroundTransparency = 1
-			Btn.BackgroundColor3 = Color3.fromRGB(176, 176, 176)
+			leaveTween:Play()
 		end)
 
 		Btn.MouseButton1Click:Connect(callback)
